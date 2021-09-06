@@ -1,7 +1,7 @@
 #! /bin/bash
 
 ## SCRIPT PARA LA CREACION DE USUARIOS EN EL SISTEMA OPERATIVO
-usuarios=("admin" "dba" "app" "respaldo")
+usuarios=("administrador" "dba" "app" "respaldo" "vendedor" "cliente")
 
 echo "Creando los usuarios del sistema operativo"
 

@@ -2,36 +2,26 @@
 
 ## SCRIPT PRINCIPAL QUE EJECUTA LOS DEMAS
 
-crearUsuariosSistema
-
-# Que opciones
-opciones=("Suma" "Resta" "Multiplicacion" "Division" "Salir")
+opciones=("Crear_usuarios" "Respaldar_la_base_de_datos" "Recuperar_la_base_de_datos" "Salir")
 select opt in ${opciones[@]};
 do
   case $opt in
-    Suma)
-      let res=$a+$b
-      echo "Sumando... $a+$b=$res"
+    Crear_usuarios)
+      echo "Creando usuarios"
+      ./crearUsuariosSistema.sh
+      ./crearUsuariosDB.sh
+      ./crearBD.sh
       ;;
-    Resta)
-      let res=$a-$b
-      echo "Restando... $a-$b=$res"
+    Respaldar_la_base_de_datos)
+      echo "Respaldando la base de datos"
+      ./crearRespaldo.sh
       ;;
-    Multiplicacion)
-      echo "Multiplicando..."
-      let res=$a*$b
-      echo "Restando... $a*$b=$res"
-      ;;
-    Division)
-      if [[ $b != 0 ]]; then
-        let res=$a/$b
-        echo "Dividiendo... $a/$b=$res"
-      else
-        echo "No puedo dividir entre 0"
-      fi
+    Recuperar_la_base_de_datos)
+      echo "Recuperando la base de datos"
+      ./recuperarRespaldo.sh
       ;;
     Salir)
-      echo "Saliendo..."
+      echo "Saliendo"
       break
       ;;
     *)
