@@ -17,36 +17,39 @@ function manejo_opciones_sistema() {
 
 function crear_usuario() {
   ## SCRIPT PARA LA CREACION DE USUARIOS EN EL SISTEMA OPERATIVO
-  
+  local flag=true
   $DIALOG --clear --title "Crear nuevo usuario del sistema" --msgbox "Ingrese los nombres y contraseñas de los usuarios, para terminar deje en blanco el nombre de usuario." 0 0  
   
-  $DIALOG --clear --title "Ingresar usuario" --inputbox "Ingrese el nombre de usuario" 0 0 2> $tempfile
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
+  while $flag; do
+    $DIALOG --clear --title "Ingresar usuario" --inputbox "Ingrese el nombre de usuario" 0 0 2> $tempfile
+    if [ $? -ne 0 ]; then
+      exit 1
+    fi
 
-  USUARIO=$(cat $tempfile)
-  if [ -z $USUARIO ]; then
-    exit 0
-  fi
-  
-  $DIALOG --clear --title "Ingresar contraseña" --inputbox "Ingrese la contraseña para $USUARIO" 0 0 2> $tempfile
-  if [ $? -ne 0 ]; then
-    exit 1
-  fi
-  
-  PASS=$(cat $tempfile)
-  if [ -z $PASS ]; then
-    exit 0
-  fi
-  
-  sudo useradd -m -p $PASS $USUARIO
-  if [ $? -eq 0 ]; then
-    $DIALOG --clear --title "Usuario creado" --msgbox "Usuario $USUARIO creado con éxito." 0 0
-  else
-    $DIALOG --clear --title "Usuario no creado" --msgbox "Ocurrio un error al crear el usuario." 0 0
-    exit 1
-  fi
+    USUARIO=$(cat $tempfile)
+    if [ -z $USUARIO ]; then
+      flag=false
+      break
+    fi
+    
+    $DIALOG --clear --title "Ingresar contraseña" --inputbox "Ingrese la contraseña para $USUARIO" 0 0 2> $tempfile
+    if [ $? -ne 0 ]; then
+      exit 1
+    fi
+    
+    PASS=$(cat $tempfile)
+    if [ -z $PASS ]; then
+      exit 0
+    fi
+    
+    sudo useradd -m -p $PASS $USUARIO
+    if [ $? -eq 0 ]; then
+      $DIALOG --clear --title "Usuario creado" --msgbox "Usuario $USUARIO creado con éxito." 0 0
+    else
+      $DIALOG --clear --title "Usuario no creado" --msgbox "Ocurrio un error al crear el usuario." 0 0
+      exit 1
+    fi
+  done
 }
 
 
