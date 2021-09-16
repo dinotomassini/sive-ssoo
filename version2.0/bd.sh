@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#########################################################
+#   Script con menu para administrar la base de datos   #
+#               A.F.M. Tech System - 2021               #
+#########################################################
+
+
 readonly DBA_USER="DBA"
 readonly DBA_PASS="dba-Sive.21"
 
@@ -32,6 +38,9 @@ function manejo_opciones_bd() {
   esac
 }
 
+###################
+# Función para crear usuarios de la base de datos
+###################
 function crear_usuario_bd() {
   ## SCRIPT PARA LA CREACION DE USUARIOS DE LA BASE DE DATOS(hay que dejar que escriba los nombres?? o crea los nombres que nosotros queremos??)
   
@@ -66,6 +75,9 @@ function crear_usuario_bd() {
   fi
 }
 
+###################
+# Función para crear la base de datos
+###################
 function crear_bd() {
   mysql -u $DBA_USER -p$DBA_PASS < ./scriptsSQL/crearDB.sql
   if [ $? -eq 0 ]; then
@@ -84,6 +96,9 @@ function crear_bd() {
   fi
 }
 
+###################
+# Función para respaldar la base de datos
+###################
 function backup() {
   readonly local BACKUP_FILE_NAME="$(date +%d-%m-%G_%H-%M-%S)-BackUp_SIVE"
   mysqldump -h localhost -u $BACKUP_USER -p$BACKUP_PASS --ssl --dump-date $DB_NAME > $PATH_BACKUP_FILES/$BACKUP_FILE_NAME.sql
@@ -95,6 +110,9 @@ function backup() {
   fi
 }
 
+###################
+# Función para recuperar la base de datos
+###################
 function restore() {
   local BACKUP_FILE_NAME=""
   # falta elegir el respaldo
@@ -115,7 +133,9 @@ function restore() {
   fi
 }
 
-
+###################
+# PRINCIPAL
+###################
 flag=true
 while $flag; do
   $DIALOG --clear --title "Menú de Base de Datos" --menu "Elige una opción:" 0 0 0 \

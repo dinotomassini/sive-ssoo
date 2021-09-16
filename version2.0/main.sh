@@ -1,7 +1,9 @@
 #!/bin/bash
 
-## SCRIPT PRINCIPAL QUE EJECUTA LOS DEMAS
-
+####################################################
+#   Script con menu para administrar el servidor   #
+#            A.F.M. Tech System - 2021             #
+####################################################
 
 
 #Para generar las pantallas y borrar el archivo temporal donde se guardan las acciones del usuario
@@ -30,8 +32,10 @@ function menuPrincipal() {
     exit 0
   fi
 }
-
-# Funcion para el manejo de las opciones
+ 
+###################
+# Función para el manejo de las opciones
+###################
 function manejo_opciones_ppal() {
   case $choice in
     1)
@@ -49,34 +53,11 @@ function salir() {
   exit 0
 }
 
-#################################################
+###################
 ## PRINCIPAL
-#################################################
-# while true; do
-  menuPrincipal
-# done
-#################################################
+###################
+menuPrincipal
 
-
-# if [ $exito -eq 1 ]; then
-#     $DIALOG --clear --title "Eliminar perfil" --msgbox "Se elimino y creo el nuevo perfil de $USUARIO con exito en Mozilla Firefox." 0 0
-#   else
-#     $DIALOG --clear --title "Eliminar perfil" --msgbox "No se pudo eliminar o crear el nuevo perfil de $USUARIO en Mozilla Firefox." 0 0
-#   fi
-
-#   # Funcion para agregar el usuario para trabajar
-# function set_nombre() {
-#   $DIALOG --clear --title "Ingresar usuario" --inputbox "Ingrese el nombre de usuario para trabajar en su perfil" 0 0 2> $tempfile
-#   if [ $? -ne 0 ]; then
-#     exit 1
-#   fi
-#   USUARIO=$(cat $tempfile)
-#   if [ -z $USUARIO ]; then
-#     echo "El usuario no puede estar vacio"
-#     exit 1
-#   fi
-#   get_perfil
-# }
 
 
 # # Funcion para devolver el archivo o directorio al dueño
